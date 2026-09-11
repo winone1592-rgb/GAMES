@@ -14,7 +14,8 @@ class DiceGame:
 
     def save_result(self, nickname, result):
         with open(self.filename, "a", encoding="utf-8") as file:
-            file.write(f"{nickname},{result}\n")
+            # 💡 수정된 부분: f-string 양끝에 괄호()를 추가했습니다.
+            file.write(f"({nickname}, {result})\n")
         print(f"\n[안내] {nickname}님의 게임 결과({result})가 '{self.filename}'에 저장되었습니다.")
 
     def show_history(self):
@@ -22,9 +23,11 @@ class DiceGame:
         try:
             with open(self.filename, "r", encoding="utf-8") as file:
                 for line in file:
-                    parts = line.strip().split(',')
+                    # 💡 수정된 부분: txt 파일에 있는 괄호()를 제거하고 깔끔하게 읽어옵니다.
+                    clean_line = line.strip().strip("()")
+                    parts = clean_line.split(',')
                     if len(parts) == 2:
-                        print(f"👤 닉네임: {parts[0]} | 🏆 결과: {parts[1]}")
+                        print(f"👤 닉네임: {parts[0].strip()} | 🏆 결과: {parts[1].strip()}")
         except FileNotFoundError:
             print("아직 저장된 결과가 없습니다. 첫 게임의 주인공이 되어보세요!")
         print("--------------------------------------\n")
