@@ -19,6 +19,9 @@ class LoginManager:
         print("로그인 3회 실패로 프로그램을 종료합니다.")
         return False
 
+
+from DiceGame import DiceGame
+
 # 전체 프로그램
 class App:
     def __init__(self):

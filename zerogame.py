@@ -69,6 +69,3 @@ class ZeroGame:
 
         print(f"{nickname},{self.result} 결과가 저장되었습니다.")
 
-
-game = ZeroGame()
-game.play()
