@@ -1,4 +1,3 @@
-# 각자의 게임을 클래스화 하는거에요!
 # 로그인 관련
 class LoginManager:
     def __init__(self, correct_id, correct_pw, max_attempts=3):
@@ -20,22 +19,19 @@ class LoginManager:
         print("로그인 3회 실패로 프로그램을 종료합니다.")
         return False
 
-
 # 전체 프로그램
 class App:
     def __init__(self):
         self.login_manager = LoginManager("admin", "1234")
 
-    # 메인 메뉴
     def print_menu(self):
         print()
         print("1. 가위바위보 게임")
         print("2. 제로 게임")
         print("3. 동전던지기 게임")
-        print("4. 주사위 게임")
+        print("4. 주사위 게임")        
         print("5. 게임 종료")
 
-    # 메뉴 입력
     def input_menu(self):
         while True:
             try:
@@ -44,7 +40,6 @@ class App:
             except ValueError:
                 print("숫자만 입력해주세요.")
 
-    # 프로그램 실행
     def run(self):
         if not self.login_manager.login():
             return
@@ -53,97 +48,54 @@ class App:
             self.print_menu()
             menu = self.input_menu()
 
-            # 1. 가위바위보 게임
             if menu == 1:
-                print()
-                print("===== 가위바위보 게임 =====")
-                print("1. 가위바위보 게임 시작")
-                print("2. 가위바위보 게임 기록보기")
-                print("3. 뒤로가기")
-
-                choose = input("메뉴를 선택해주세요: ")
-
-                if choose == "1":
-                    # 가위바위보 게임 실행
-     
-
-                elif choose == "2":
-                    # 가위바위보 기록 보기
- 
-
-                elif choose == "3":
-                    continue
-
-                else:
-                    print("잘못된 메뉴선택입니다.")
-
-            # 2. 제로 게임
-            elif menu == 2:
-                print()
-                print("===== 제로 게임 =====")
-                print("1. 제로게임 시작")
-                print("2. 제로게임 기록보기")
-                print("3. 뒤로가기")
-
-                choose = input("메뉴를 선택해주세요: ")
-
-                if choose == "1":
-                    # 제로 게임 실행
-
-                elif choose == "2":
-                    # 제로 기록 버기
-
-                elif choose == "3":
-                    continue
-
-                else:
-                    print("잘못된 메뉴선택입니다.")
-
-            # 3. 동전던지기 게임
-            elif menu == 3:
-                print()
-                print("===== 동전던지기 게임 =====")
-                print("1. 동전던지기 게임 시작")
-                print("2. 동전던지기 게임 기록보기")
-                print("3. 뒤로가기")
-
-                choose = input("메뉴를 선택해주세요: ")
-
-                if choose == "1":
-                    # 동전 게임 실행
-
-                elif choose == "2":
-                    # 동전 기록 보기
-
-                elif choose == "3":
-                    continue
-
-                else:
-                    print("잘못된 메뉴선택입니다.")
-
-            # 4. 주사위 게임
-            elif menu == 4:
-                print()
-                print("===== 주사위 게임 =====")
                 print("1. 주사위 게임 시작")
                 print("2. 주사위 게임 기록보기")
-                print("3. 뒤로가기")
 
                 choose = input("메뉴를 선택해주세요: ")
 
                 if choose == "1":
-                    # 주사위 게임 실행
+                    success = self.DiceGame.play()
+
+                    nickname = input("닉네임을 입력하세요: ")
+
+                    if success:
+                        self.history_board.add_record(nickname, "성공")
+                    else:
+                        self.history_board.add_record(nickname, "실패")
 
                 elif choose == "2":
-                    # 주사위 기록 버기
+                    self.history_board.show_result()
 
-                elif choose == "3":
-                    continue
+                else:
+                    print("잘못된 메뉴선택입니다.")
+                    
+            elif menu == 2:
+                print("1. 제로게임 시작")
+                print("2. 제로게임 기록보기")
+                choose=input("메뉴를 선택해주세요:")
+                if choose == "1":
+                    self.zerogame.zero()
+                elif choose == "2":
+                    self.zerogame.read_history()
+                else:
+                    print("잘못된 메뉴선택입니다.")
+
+            elif menu == 3:
+                print("1. 369게임 시작")
+                print("2. 369게임 기록보기")
+                choose=input("메뉴를 선택해주세요:")
+                if choose == "1":
+                    self.ThreeSixNineGame.play_game()
+                elif choose == "2":
 
                 else:
                     print("잘못된 메뉴선택입니다.")
 
-            # 5. 프로그램 종료
+            elif menu == 4:
+                game = "홀짝게임"
+
+
             elif menu == 5:
                 print("프로그램을 종료합니다.")
                 break
