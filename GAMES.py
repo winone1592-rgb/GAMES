@@ -35,10 +35,18 @@ class RockPaperScissors:
             result = "패배"
             print("졌습니다.")
 
-        nickname = input("닉네임을 입력하세요: ")
+        return result
 
-        return nickname, result
+    def save_result(self, nickname, result):
+        with open("rock_paper_scissors_result.txt", "a", encoding="utf-8") as file:
+            file.write(nickname + " " + result + "\n")
 
 
 game = RockPaperScissors()
-game.play()  
+
+result = game.play()
+
+nickname = input("닉네임을 입력하세요: ").strip()
+game.save_result(nickname, result)
+
+print("결과가 rock_paper_scissors_result.txt 에 저장되었습니다.")
