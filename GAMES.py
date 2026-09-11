@@ -16,20 +16,29 @@ class RockPaperScissors:
         print("컴퓨터:", computer)
 
         if user == computer:
+            result = "무승부"
             print("무승부입니다.")
 
         elif user == "가위" and computer == "보":
+            result = "승리"
             print("이겼습니다.")
 
         elif user == "바위" and computer == "가위":
+            result = "승리"
             print("이겼습니다.")
 
         elif user == "보" and computer == "바위":
+            result = "승리"
             print("이겼습니다.")
 
         else:
+            result = "패배"
             print("졌습니다.")
+
+        nickname = input("닉네임을 입력하세요: ")
+
+        return nickname, result
 
 
 game = RockPaperScissors()
-game.play() 
+game.play()  
